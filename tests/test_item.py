@@ -5,6 +5,10 @@ import os
 
 def test_Item():
     item1 = item.Item("Смартфон", 10000, 20)
+
+    assert str(item1) == 'Смартфон'
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
     assert item1.calculate_total_price() == 200000
     assert item1.name == "Смартфон"
     assert item1.price == 10000
