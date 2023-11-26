@@ -12,3 +12,6 @@ def test_keyboard():
     # Сделали EN -> RU -> EN
     kb.change_lang()
     assert str(kb.language) == "EN"
+
+    kb.language = 'RU'
+    assert str(kb.language) == 'RU'
