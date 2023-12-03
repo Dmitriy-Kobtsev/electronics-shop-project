@@ -1,4 +1,5 @@
 import csv
+import os
 
 class InstantiateCSVError(Exception):
     def __init__(self, message=None):
@@ -20,7 +21,6 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        super().__init__()
         self.__name = name
         self.price = price
         self.quantity = quantity
@@ -49,7 +49,7 @@ class Item:
             self.__name = name
 
     @classmethod
-    def instantiate_from_csv(cls, path='..\\src\\Items.csv'):
+    def instantiate_from_csv(cls, path=os.path.join('..', 'src', 'Items3.csv')):
         """класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
         cls.all = []
         try:
@@ -62,12 +62,8 @@ class Item:
                     price = cls.string_to_number(row['price'])
                     quantity = cls.string_to_number(row['quantity'])
                     Item = cls(name, price, quantity)
-        except InstantiateCSVError as ex:
-            print(ex)
         except FileNotFoundError:
-            print('Отсутствует файл item.csv')
-
-
+            raise FileNotFoundError('Отсутствует файл item.csv')
 
     @staticmethod
     def string_to_number(string):
